@@ -5,12 +5,13 @@
 <p>review count: <%= chosen.review_count %> </p>
 <p>rating: <%= chosen.rating%> </p>
 <img src=" <%= chosen.rating_img_url %>"><br>
-  <!-- src="https://www.google.com/maps/embed/v1/directions?origin=place_id:ChIJh5ETQ367woARPsvfMgHueDY&destination=place_id:ChIJMTjaV2He3IARtyH1IrlTgdE&key=AIzaSyCvB_F_S_FrDlcGvJkz-3LxCtcVBCn55hw" -->
+  <!-- src="https://www.google.com/maps/embed/v1/place?key=AIzaSyCvB_F_S_FrDlcGvJkz-3LxCtcVBCn55hw&q=<%= chosen.name %>,<%= chosen.location["city"]%>+<%= chosen.location["state_code"]%>" -->
 <iframe
   width="600"
   height="450"
   frameborder="0" style="border:0"
-    src="https://www.google.com/maps/embed/v1/place?key=AIzaSyCvB_F_S_FrDlcGvJkz-3LxCtcVBCn55hw&q=<%= chosen.name %>,<%= chosen.location["city"]%>+<%= chosen.location["state_code"]%>"
+
+    src="https://www.google.com/maps/embed/v1/directions?origin=<%=cll%>&destination=<%=chosen.location["coordinate"]["latitude"]%>,<%=chosen.location["coordinate"]["longitude"]%>&key=AIzaSyCvB_F_S_FrDlcGvJkz-3LxCtcVBCn55hw"
    allowfullscreen>
 </iframe><br>
 

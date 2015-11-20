@@ -55,19 +55,38 @@ shakerRouter.post('/result', function(req,res) {
     /* Add the query string to the url */
     var apiURL = url+'?'+paramURL;
 
-  console.log(apiURL)
+  // console.log(apiURL)
    request(apiURL, function(error, response, body){
-     var random = Math.floor((Math.random() * 20))
-     var chosen = JSON.parse(body).businesses[random]
-      // var name = chosen["name"]
-      // var review_count = chosen["review_count"]
-      // var rating = chosen["rating"]
-      // var image = chosen["image_url"]
-      //
-      // var display_phone = chosen["display_phone"]
-      // var rating_img_small = chosen[""]
+     if (error) {
+       res.render('shaker', {user:req.user, message: req.flash('Cannot make request to API!')})
+     }
+     else {
+       if (JSON.parse(body)["total"] !== 0) {
+         console.log(JSON.parse(body))
+         var random = Math.floor((Math.random() * JSON.parse(body).businesses.length))
+         var chosen = JSON.parse(body).businesses[random]
+         res.render('result', {chosen: chosen, user:req.user, cll: req.body.cll})
+       }
+       else {
+         res.render('shaker', {user:req.user, message: req.flash('No Result!Try Again')})
+         console.log('no result!')
+       }
+
+     }
       // res.send(chosen)
-    res.render('result', {chosen: chosen, user:req.user, cll: req.body.cll})
+
+      // var origin_idURL="https://maps.googleapis.com/maps/api/geocode/json?latlng="+req.body.cll+"&key=AIzaSyA_X-vj3xIoO8GLmr1YKR13B1JGOA_GE2M"
+      //  var destination_idURL = "https://maps.googleapis.com/maps/api/place/textsearch/json?query="+chosen.name.replace(' ','+')+"+"+chosen.location["city"].replace(' ','+')+"&key=AIzaSyA_X-vj3xIoO8GLmr1YKR13B1JGOA_GE2M"
+
+
+      // request(destination_idURL, function(error,response,body){
+        // var destination_id = JSON.parse(body)["results"][0]["place_id"]
+
+        // request(origin_idURL, function(error,response,body){
+          // var origin_id = JSON.parse(body)["results"][0]["place_id"]
+
+        // })
+      // })
   })
 }
 
