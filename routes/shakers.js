@@ -67,7 +67,7 @@ shakerRouter.post('/result', function(req,res) {
       // var display_phone = chosen["display_phone"]
       // var rating_img_small = chosen[""]
       // res.send(chosen)
-    res.render('result', {chosen: chosen, user:req.user})
+    res.render('result', {chosen: chosen, user:req.user, cll: req.body.cll})
   })
 }
 
