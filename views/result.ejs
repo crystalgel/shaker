@@ -1,0 +1,20 @@
+<h1><%= chosen.name %></h1><br>
+<img src="<%= chosen.image_url %>">
+
+<p>phone-numbe: <%=chosen.display_phone %></p>
+<p>review count: <%= chosen.review_count %> </p>
+<p>rating: <%= chosen.rating%> </p>
+<img src=" <%= chosen.rating_img_url %>">
+<img src="https://maps.googleapis.com/maps/api/staticmap?center=<%= chosen.location["coordinate"]["latitude"]%>,<%= chosen.location["coordinate"]["longitude"]%>&zoom=15&size=300x150&maptype=roadmap&markers=color:red%7Clabel:C%7C<%= chosen.location["coordinate"]["latitude"]%>,<%= chosen.location["coordinate"]["longitude"]%>
+&key=AIzaSyB4AyWDh2G6--ker1o4EBMOMQCiG6VmT1I"><br>
+<button id="shake-again">Try again</button>
+<a href="/"><button id="back">Back</button></a>
+
+<script>
+$('#shake-again').on('click',function(evt){
+  location.reload()
+})
+
+
+
+</script>
